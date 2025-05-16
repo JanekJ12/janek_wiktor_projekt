@@ -1,0 +1,136 @@
+/* RESET I PODSTAWY */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2c3e50;
+  padding: 20px 40px;
+  color: white;
+  position: relative;
+}
+
+.logo img {
+  height: 50px;
+  object-fit: contain;
+}
+
+/* MENU TOGGLE (HAMBURGER) */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* MENU */
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.menu a:hover {
+  color: #1abc9c;
+}
+
+/* Aktywna zakładka */
+.menu a.active {
+  color: #1abc9c;
+  font-weight: bold;
+  border-bottom: 2px solid #1abc9c;
+}
+
+/* GŁÓWNA TREŚĆ */
+main {
+  padding: 40px;
+}
+
+/* FORMULARZ UPLOADU */
+.upload-form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.upload-area {
+  display: block;
+  padding: 40px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  color: #666;
+  transition: border-color 0.3s;
+}
+
+.upload-area:hover {
+  border-color: #1abc9c;
+}
+
+.upload-form button {
+  padding: 10px 20px;
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.upload-form button:hover {
+  background-color: #16a085;
+}
+
+/* RESPONSYWNOŚĆ */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #34495e;
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    z-index: 1000;
+  }
+
+  .menu.open {
+    display: flex;
+  }
+
+  .menu ul {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+  }
+}
