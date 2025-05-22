@@ -27,14 +27,50 @@
   <main>
     <h1>Wyślij plik</h1>
 
-    <form class="upload-form">
+    <form id="upload-form" enctype="multipart/form-data" class="upload-form">
       <label for="file-upload" class="upload-area">
         Kliknij lub przeciągnij plik tutaj
-        <input type="file" id="file-upload" hidden />
+        <input type="file" id="file-upload" name="file" required />
       </label>
       <button type="submit">Wyślij</button>
     </form>
   </main>
+
+  <script>
+    const form = document.getElementById('upload-form');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const fileInput = document.getElementById('file-upload');
+      if (fileInput.files.length === 0) {
+        alert('Wybierz plik przed wysłaniem!');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+
+      try {
+        const response = await fetch('/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          // Po udanym uploadzie przekieruj na /download
+          window.location.href = '/download';
+        } else {
+          alert('Błąd: ' + (result.error || 'Nieznany błąd'));
+        }
+      } catch (error) {
+        alert('Błąd podczas wysyłania pliku.');
+        console.error(error);
+      }
+    });
+  </script>
 
   <script src="../static/script/Drop.js"></script>
 </body>

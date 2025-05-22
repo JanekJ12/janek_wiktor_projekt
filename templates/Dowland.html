@@ -26,6 +26,11 @@
 
   <main>
     <h1>Pobieranie plików</h1>
+    <ul>
+      {% for file in files %}
+        <li><a href="{{ url_for('uploaded_file', filename=file) }}">{{ file }}</a></li>
+      {% endfor %}
+    </ul>
   </main>
 
   <script src="../static/script/index.js"></script>
