@@ -2,7 +2,7 @@ from flask import Flask, request, redirect, url_for, render_template, send_from_
 import os
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = 'image_Drop'  # zmienione z 'uploads' na 'image_Drop'
+UPLOAD_FOLDER = 'image_Drop'  # folder z obrazami i plikami
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'zip', 'rar'}
 
 app = Flask(__name__)
@@ -37,7 +37,9 @@ def upload_page():
 @app.route('/download')
 def download_page():
     files = os.listdir(app.config['UPLOAD_FOLDER'])
-    return render_template('Dowland.html', files=files)
+    image_files = [f for f in files if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif'))]
+    other_files = [f for f in files if not f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif'))]
+    return render_template('Dowland.html', image_files=image_files, files=other_files)
 
 @app.route('/about')
 def about_page():
